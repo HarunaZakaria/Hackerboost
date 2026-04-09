@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+.header {
+  background-image: linear-gradient(to bottom, #318131, #3bbd26);
+  color: #fff;
+  padding: 5px 10px;
+}
+.quote-btn {
+  border: none;
+  padding: 5px;
+  width: 150px;
+  color: #fff;
+  text-shadow: 0 0 3px #000;
+  font-weight: bold;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom, #318131, #3bbd26);
+}
