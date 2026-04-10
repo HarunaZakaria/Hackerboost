@@ -55,7 +55,25 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  transition: all 2s ease;
 }
 .quote-btn:hover {
   background-image: linear-gradient(to bottom, #318131, #3bbd26);
+}
+
+/* Tablet and Desktop view */
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+  .image {
+    width: 200px;
+  }
+  .header{
+    margin-top: 30px;
+  }
+  .quote-btn {
+    width: 200px;
+    margin-bottom: 30px;
+  }
 }
