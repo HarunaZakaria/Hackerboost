@@ -7,3 +7,4 @@ function User(props) {
     </duv>
   );
 }
+export default User;
