@@ -1,5 +1,7 @@
+import { use } from "react";
 import { pizzaData } from "../data";
 import Pizza from "./Pizzas";
+import User from "./Users";
 function Menu() {
   return (
     <div>
@@ -11,24 +13,23 @@ function Menu() {
             <div key={index}>
               <Pizza
                 name={item.name}
-                description={item.description}
+                description={item.ingredients}
                 price={item.price}
                 image={item.photoName}
               />
             </div>
           ))}
-          <Pizza
-            name={pizzaData[0].name}
-            description={pizzaData[0].description}
-            price={pizzaData[0].price}
-            image={pizzaData[0].photoName}
-          />
-          {/* <Pizza
-            name="Focaccia"
-            description="Delicious Italian flatbread topped wiith olive oil and herbs."
-            price="$10"
-            image="/pizzas/focaccia.jpg"
-          /> */}
+          <div>
+            {pizzaData.map((user, index) => (
+              <div>
+                <User
+                  image={user.photoName}
+                  name={user.name}
+                  bio={user.ingredients}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
