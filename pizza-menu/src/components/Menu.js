@@ -1,7 +1,6 @@
 import { use } from "react";
 import { pizzaData } from "../data";
 import Pizza from "./Pizzas";
-import User from "./Users";
 function Menu() {
   return (
     <div>
@@ -16,24 +15,21 @@ function Menu() {
                 description={item.ingredients}
                 price={item.price}
                 image={item.photoName}
+                btn={<PizzaBtn />}
               />
             </div>
           ))}
-          <div>
-            {pizzaData.map((user, index) => (
-              <div>
-                <User
-                  image={user.photoName}
-                  name={user.name}
-                  bio={user.ingredients}
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </div>
   );
 }
 
+function PizzaBtn() {
+  return (
+    <div>
+      <button>Click Me</button>
+    </div>
+  );
+}
 export default Menu;
