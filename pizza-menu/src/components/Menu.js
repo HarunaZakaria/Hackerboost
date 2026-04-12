@@ -1,7 +1,6 @@
 import { use } from "react";
 import { pizzaData } from "../data";
 import Pizza from "./Pizzas";
-import PizzaBtn from "./Button";
 function Menu() {
   return (
     <div>
@@ -16,7 +15,6 @@ function Menu() {
                 description={item.ingredients}
                 price={item.price}
                 image={item.photoName}
-                btn={<PizzaBtn />}
               />
             </div>
           ))}

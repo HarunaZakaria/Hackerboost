@@ -1,13 +1,14 @@
 function Pizza(props) {
   return (
-    <div className="pizza">
+    <div>
+        <div className="pizza">
       <img src={props.image} alt="Pizza" />
       <div>
         <h3>{props.name}</h3>
       <p>{props.description}</p>
       <span>{props.price}</span>
-      <button>{props.btn}</button>
       </div>
+    </div>
     </div>
   );
 }
