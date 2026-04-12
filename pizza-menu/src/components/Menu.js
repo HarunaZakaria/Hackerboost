@@ -1,6 +1,7 @@
 import { use } from "react";
 import { pizzaData } from "../data";
 import Pizza from "./Pizzas";
+import PizzaBtn from "./Button";
 function Menu() {
   return (
     <div>
@@ -25,11 +26,4 @@ function Menu() {
   );
 }
 
-function PizzaBtn() {
-  return (
-    <div>
-      <button>Click Me</button>
-    </div>
-  );
-}
 export default Menu;
