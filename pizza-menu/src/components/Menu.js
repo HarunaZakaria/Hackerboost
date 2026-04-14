@@ -13,7 +13,7 @@ function Menu() {
               <Pizza
                 name={item.name}
                 description={item.ingredients}
-                price={item.price}
+                price={"$" + item.price}
                 image={item.photoName}
               />
               <button className="grid-btn">Buy</button>
