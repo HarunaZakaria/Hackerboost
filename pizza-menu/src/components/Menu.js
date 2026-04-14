@@ -1,6 +1,7 @@
 import { use } from "react";
 import { pizzaData } from "../data";
 import Pizza from "./Pizzas";
+import PizzaBtn from "./Button";
 function Menu() {
   return (
     <div>
@@ -16,7 +17,7 @@ function Menu() {
                 price={"$" + item.price}
                 image={item.photoName}
               />
-              <button className="grid-btn">Buy</button>
+              <PizzaBtn title="Buy" />
             </div>
           ))}
         </div>

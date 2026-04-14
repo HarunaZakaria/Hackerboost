@@ -1,7 +1,7 @@
 function PizzaBtn(props) {
   return (
     <div className="btns">
-      <button>{props.title}</button>
+      <button className="grid-btn">{props.title}</button>
     </div>
   );
 }
