@@ -1,10 +1,11 @@
+import Square from "./components/Square";
 export default function Board() {
   return (
     <div>
       <div className="board-row">
-        <button className="square">1</button>
-        <button className="square">2</button>
-        <button className="square">3</button>
+        <Square title="1" />
+        <Square title="2" />
+        <Square title="3" />
       </div>
       <div className="board-row">
         <button className="square">4</button>
