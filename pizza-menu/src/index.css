@@ -44,11 +44,11 @@ body {
 
   text-transform: uppercase;
   text-align: center;
-  font-size: 5.2rem;
+  font-size: 3.2rem;
   font-weight: 300;
   letter-spacing: 3px;
   position: relative;
-  width: 100%;
+  width: 250px;
   display: block;
 }
 
@@ -152,7 +152,10 @@ body {
 /* *************** */
 
 .footer {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  width: 300px;
+  text-align: center;
+  opacity: 80%;
 }
 
 .order {
@@ -187,24 +190,42 @@ FONT SIZE SYSTEM (px)
 */
 
 /* Grid section */
-.grid-container{
+.grid-container {
   display: grid;
   /* Creates 3 equal-width columns */
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(1fr);
   /* Sets spacing between items */
-  gap: 10px; 
+  gap: 10px;
   padding: 10px;
 }
-.grid-item{
-  
+@media (min-width: 768px) {
+  .header h1{
+    width: 100%;
+    font-size: 5.2rem;
+  }
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .footer{
+    font-size: 1.4rem;
+    width: 100%;
+  }
+}
+.grid-item {
   border: 1px solid #ccc;
   padding: 20px;
   text-align: center;
+  width: 300px;
 }
-.grid-btn{
+.grid-btn {
   width: 150px;
   background-color: #e9bb24;
   padding: 5px 7px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  transition: all 2s;
+}
+.grid-btn:hover{
+  background: #8b6e0f;
 }
