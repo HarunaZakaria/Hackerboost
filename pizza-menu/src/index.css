@@ -185,3 +185,26 @@ SPACING SYSTEM (px)
 FONT SIZE SYSTEM (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 /52 / 62 / 74 / 86 / 98
 */
+
+/* Grid section */
+.grid-container{
+  display: grid;
+  /* Creates 3 equal-width columns */
+  grid-template-columns: repeat(3, 1fr); 
+  /* Sets spacing between items */
+  gap: 10px; 
+  padding: 10px;
+}
+.grid-item{
+  
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+}
+.grid-btn{
+  width: 150px;
+  background-color: #e9bb24;
+  padding: 5px 7px;
+  border: none;
+  border-radius: 5px;
+}
