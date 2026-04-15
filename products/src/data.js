@@ -1,4 +1,4 @@
-const products = [
+export const data = [
   { category: "Fruits", price: "Ghc10", stocked: true, name: "apple" },
   { category: "Fruits", price: "Ghc20", stocked: false, name: "Orange" },
   { category: "Fruits", price: "Ghc10", stocked: true, name: "Mango" },

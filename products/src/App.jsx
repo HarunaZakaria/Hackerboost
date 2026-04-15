@@ -1,13 +1,10 @@
-import SearchBar from "./components/Search";
+import FilterableProductTable from "./components/FilterableProductTable";
+import { data } from "./data";
 
 function App() {
-
   return (
     <>
-    <section className="search-check">
-      <SearchBar />
-    </section>
-      <h1>Hello World</h1>
+      <FilterableProductTable products={data} />
     </>
   );
 }
