@@ -9,13 +9,20 @@ function App() {
     if (activeStep < 3) setActiveStep(activeStep + 1);
   }
   function changePrev() {
-       if (activeStep > 1) setActiveStep(activeStep - 1);
-
+    if (activeStep > 1) setActiveStep(activeStep - 1);
   }
+  const [isClose, setIsClose] = useState(true);
+  const closed = () => {
+    setIsClose(!isClose);
+  };
 
   return (
     <>
-      <div className="steps">
+      <div onClick={closed} className="closed">
+        X
+      </div>
+
+      <div className={isClose ? "steps" : "close"}>
         <div className="numbers">
           <div className={activeStep === 1 ? "active" : ""}>1</div>
           <div className={activeStep === 2 ? "active" : ""}>2</div>
