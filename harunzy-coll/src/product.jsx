@@ -1,0 +1,60 @@
+const products = [
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 1,
+    imgUrl: "/images/sandals1.jpeg",
+  },
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 2,
+    imgUrl: "/images/sandals2.jpeg",
+  },
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 3,
+    imgUrl: "/images/sandals3.jpeg",
+  },
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 4,
+    imgUrl: "/images/sandals4.jpeg",
+  },
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 5,
+    imgUrl: "/images/sandals5.jpeg",
+  },
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 6,
+    imgUrl: "/images/sandals6.jpeg",
+  },
+  {
+    name: "BirkenStock",
+    price: 200,
+    quantity: 5,
+    isAvailable: true,
+    id: 7,
+    imgUrl: "/images/sandals7.jpeg",
+  },
+];
+
+export default products;
