@@ -62,8 +62,8 @@ function ProductDetail() {
             <span className="rating-count">({product.reviews} reviews)</span>
           </div>
           <div className="product-detail-price">
-            <span className="current-price">${product.price}</span>
-            {product.originalPrice > product.price && (<><span className="original-price">${product.originalPrice}</span><span className="discount-tag">Save {discount}%</span></>)}
+            <span className="current-price">Ghc{product.price}</span>
+            {product.originalPrice > product.price && (<><span className="original-price">Ghc{product.originalPrice}</span><span className="discount-tag">Save {discount}%</span></>)}
           </div>
           <p className="product-detail-desc">{product.description}</p>
           <div className="product-detail-section">
