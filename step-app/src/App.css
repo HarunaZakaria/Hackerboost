@@ -6,9 +6,9 @@ body {
   font-family: sans-serif;
   color: #333;
 }
-.closed{
+/* .closed{
   font-size: 26px;
-}
+} */
 .close {
   display: none;
 }
@@ -99,8 +99,8 @@ h3 {
   text-transform: uppercase;
 }
 
-.close {
-  position: absolute;
+.closed {
+  
   top: 16px;
   right: 16px;
   border: none;
