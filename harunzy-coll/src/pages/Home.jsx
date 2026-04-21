@@ -17,7 +17,7 @@ function Home() {
           <span className="feature-icon">🚚</span>
           <div>
             <strong>Free Delivery</strong>
-            <p>On orders over $200</p>
+            <p>On orders over Ghc1000</p>
           </div>
         </div>
         <div className="feature-item">
