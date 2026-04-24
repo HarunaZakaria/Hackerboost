@@ -13,7 +13,7 @@ function App() {
   }
   const [isClose, setIsClose] = useState(true);
   const closed = () => {
-    setIsClose(!isClose);
+    setIsClose(isClose => !isClose);
   };
 
   return (
@@ -44,7 +44,7 @@ function App() {
             className={activeStep <= 3 ? "active" : ""}
             onClick={changeNext}
           >
-            Next{" "}
+            Next
           </button>
         </div>
       </div>
