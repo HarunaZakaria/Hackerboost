@@ -4,25 +4,14 @@ import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
 
-const courses = [
-  {
-    name: "Frontend Development",
-    description: "responsible for creating the client side",
-    price: 50,
-  },
-  {
-    name: "Backend Development",
-    description: "responsible for creating the server side logic",
-    price: 100,
-  },
-  {
-    name: "Full StackDeevelopment",
-    description: "responsible for combining both frontend and backend",
-    price: 200,
-  },
+const messages = [
+  "Learn Frontend Development",
+  "Learn Backend Development",
+  "Learn Fulstack Development",
 ];
 function App() {
   const [steps, setSteps] = useState(0);
+  const [toggle, setToggle] = useState(true);
 
   function handleFrontendChange() {
     setSteps(1);
@@ -35,10 +24,23 @@ function App() {
     setSteps(3);
   }
 
+  function lightDarkMode() {
+    setToggle((toggle) => !toggle);
+  }
+
   return (
-    <div>
+    <div className={!toggle && "dark"}>
       <div className="container">
+        <div className="dark-light-mode">
+          <div onClick={lightDarkMode}>{toggle ? "Dark" : "Light"}</div>
+        </div>
         <div className="container-btns">
+          <div
+            className={steps === 0 ? "active" : "neutral"}
+            onClick={handleFrontendChange}
+          >
+            All
+          </div>
           <div
             className={steps === 1 ? "active" : "neutral"}
             onClick={handleFrontendChange}
@@ -58,15 +60,7 @@ function App() {
             FullStack
           </div>
         </div>
-        <div className="container-content">
-          {courses.map((course, index) => (
-            <div key={index}>
-              <h1>{course.name}</h1>
-              <p>{course.description}</p>
-              <p>{course.price}</p>
-            </div>
-          ))}
-        </div>
+        <div className="container-content">{messages[steps - 1]}</div>
       </div>
     </div>
   );
