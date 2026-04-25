@@ -11,7 +11,7 @@ const messages = [
 ];
 function App() {
   const [steps, setSteps] = useState(0);
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
 
   function handleFrontendChange() {
     setSteps(1);
@@ -29,18 +29,12 @@ function App() {
   }
 
   return (
-    <div className={!toggle && "dark"}>
+    <div className={toggle ? "dark" : "light"}>
       <div className="container">
         <div className="dark-light-mode">
-          <div onClick={lightDarkMode}>{toggle ? "Dark" : "Light"}</div>
+          <div onClick={lightDarkMode}>{toggle ? "Light" : "Dark"}</div>
         </div>
         <div className="container-btns">
-          <div
-            className={steps === 0 ? "active" : "neutral"}
-            onClick={handleFrontendChange}
-          >
-            All
-          </div>
           <div
             className={steps === 1 ? "active" : "neutral"}
             onClick={handleFrontendChange}
@@ -60,7 +54,9 @@ function App() {
             FullStack
           </div>
         </div>
-        <div className="container-content">{messages[steps - 1]}</div>
+        <div className="container-content">
+          {messages[steps - 1]}
+          </div>
       </div>
     </div>
   );
