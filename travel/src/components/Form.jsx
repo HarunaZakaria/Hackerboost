@@ -1,4 +1,4 @@
-function Form() {
+export default function Form() {
   return (
     <div>
       <form>
