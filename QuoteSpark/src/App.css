@@ -14,3 +14,6 @@ body {
   font-weight: 700;
   opacity: 69%;
 }
+.item {
+  padding: 10px;
+}
