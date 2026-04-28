@@ -12,7 +12,11 @@ export default function PackingList() {
     </div>
   );
 }
-
 function Item({ name, isPacked }) {
-  return <li className="item">{name} ✅</li>;
+  //   if (isPacked) {
+  //     return <li className="item">{name}✅</li>;
+  //   } else {
+  //     return <li className="item">{name}</li>;
+  //   }
+  return <li className="item"> {isPacked ? <del>{name }+ "✅"</del> : name}</li>;
 }
