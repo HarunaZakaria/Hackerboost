@@ -6,11 +6,15 @@ function CartPage() {
 
   function handleWhatsAppCheckout() {
     if (cartItems.length === 0) return;
-    let msg = "Hi! I'd like to place an order:\n\n";
+    const baseUrl = window.location.origin;
+    let msg = "Hi! I'd like to place an order from Harunzy Collection 👟\n\n";
     cartItems.forEach((item, i) => {
-      msg += `${i + 1}. ${item.name} — Size: EU ${item.selectedSize}, Qty: ${item.qty}, $${item.price * item.qty}\n`;
+      const imageUrl = `${baseUrl}${item.imgUrl}`;
+      msg += `${i + 1}. *${item.name}*\n`;
+      msg += `   📏 Size: EU ${item.selectedSize} | 🔢 Qty: ${item.qty} | 💰 GHC${item.price * item.qty}\n`;
+      msg += `   🖼️ Image: ${imageUrl}\n\n`;
     });
-    msg += `\n💰 Total: $${cartTotal}\n\nPlease confirm. Thank you!`;
+    msg += `💰 *Total: GHC${cartTotal}*\n\nPlease confirm my order. Thank you!`;
     window.open(`https://wa.me/233545771497?text=${encodeURIComponent(msg)}`, "_blank");
   }
 

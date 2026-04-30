@@ -39,7 +39,17 @@ function ProductDetail() {
   }
 
   function handleWhatsApp() {
-    const msg = encodeURIComponent(`Hi! I'd like to order:\n🛒 ${product.name}\n📏 Size: ${selectedSize || "?"}\n🔢 Qty: ${qty}\n💰 $${product.price * qty}`);
+    const baseUrl = window.location.origin;
+    const imageUrl = `${baseUrl}${product.imgUrl}`;
+    const msg = encodeURIComponent(
+      `Hi! I'd like to order from Harunzy Collection 👟\n\n` +
+      `🛒 *${product.name}*\n` +
+      `📏 Size: EU ${selectedSize || "(not selected)"}\n` +
+      `🔢 Qty: ${qty}\n` +
+      `💰 Price: GHC${product.price * qty}\n\n` +
+      `🖼️ Product Image: ${imageUrl}\n\n` +
+      `Please confirm availability. Thank you!`
+    );
     window.open(`https://wa.me/233545771497?text=${msg}`, "_blank");
   }
 
