@@ -1,33 +1,37 @@
 const questions = [
   {
-    question: "What is React?",
-    options: [
-      "A database",
-      "A JavaScript library",
-      "A backend framework",
-      "An operating system",
-    ],
-    answer: "A JavaScript library",
+    question:
+      "1. Which of the following is not part of what plants used to make food?",
+    options: ["Water", "Carbon dioxide", "Moonlight"],
+    answer: "Moonlight",
   },
   {
-    question: "What hook is used for state?",
-    options: ["useFetch", "useState", "useEffect", "useData"],
-    answer: "useState",
-  },
-   {
-    question: "What is React?",
+    question: "2. Which of the following is a use of carbon dioxide?",
     options: [
-      "A database",
-      "A JavaScript library",
-      "A backend framework",
-      "An operating system",
+      "Used in fire extinguishers",
+      "Used in electricity",
+      "Used in water",
     ],
-    answer: "A JavaScript library",
+    answer: "Used in fire extinguishers",
   },
   {
-    question: "What hook is used for state?",
-    options: ["useFetch", "useState", "useEffect", "useData"],
-    answer: "useState",
+    question: "3. What gas do human beings breath out?",
+    options: ["Hydrogen", "Carbon dioxide", "Oxygen"],
+    answer: "Carbon dioxide",
+  },
+  {
+    question: "4. What gas do human beings breath in?",
+    options: ["Oxygen", "Carbon dioxide", "Hydrogen"],
+    answer: "Oxygen",
+  },
+  {
+    question: "5. Carbon dioxide can get into the environment through?",
+    options: [
+      "Eating food",
+      "Drinking water",
+      "Breathing by humans and animals",
+    ],
+    answer: "Breathing by humans and animals",
   },
 ];
 
