@@ -8,9 +8,8 @@ function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/shop", label: "Shop" },
-    { path: "/cart", label: "Cart" },
+    { path: "/", label: "🏠 Home" },
+    { path: "/shop", label: "🛍️ Shop" },
   ];
 
   return (
@@ -22,12 +21,50 @@ function Navbar() {
           <span className="brand-sub">Collection</span>
         </Link>
 
-        <div className={`nav-links ${mobileMenuOpen ? "open" : ""}`}>
+        {/* Desktop nav */}
+        <div className="nav-links-desktop">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               className={`nav-link ${location.pathname === link.path ? "active" : ""}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile overlay backdrop — only rendered when menu is open */}
+        {mobileMenuOpen && (
+          <div
+            className="mobile-overlay"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+
+        {/* Mobile slide-in drawer — always in DOM, moved with transform */}
+        <div
+          className="nav-links-mobile"
+          style={{
+            transform: mobileMenuOpen ? "translateX(0)" : "translateX(110%)",
+            visibility: mobileMenuOpen ? "visible" : "hidden",
+          }}
+        >
+          <div className="mobile-menu-header">
+            <span className="mobile-menu-title">Menu</span>
+            <button
+              className="mobile-close-btn"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          </div>
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`mobile-nav-link ${location.pathname === link.path ? "active" : ""}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.label}
