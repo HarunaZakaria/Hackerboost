@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-export default function Form() {
+export default function Form({ items, setItems }) {
+  //handle form submit
   const [newItem, setNewItem] = useState({
-    quantity: 0,
+    id: uuidv4(),
+    quantity: 1,
     description: "",
   });
-  //handle form submit
+
+  //handle submit
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(newItem);
+    setItems((items) => [...items, newItem]);
+    setNewItem({
+      id: uuidv4(),
+      quantity: 1,
+      description: "",
+    });
   }
   return (
     <div>
