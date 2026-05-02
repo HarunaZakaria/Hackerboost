@@ -2,7 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Form({ items, setItems }) {
-  //handle form submit
+
   const [newItem, setNewItem] = useState({
     id: uuidv4(),
     quantity: 1,
