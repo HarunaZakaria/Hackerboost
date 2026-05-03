@@ -1,8 +1,10 @@
+import { useState } from "react";
+
 export default function List(props) {
+  const [isBought, setIsBought] = useState(false);
   return (
     <>
       <div className="list">
-        <input type="checkbox" />
         <p>
           {props.name} <span>Ghc{props.price}</span>
         </p>
