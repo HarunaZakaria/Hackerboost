@@ -1,9 +1,13 @@
 export default function List(props) {
   return (
     <>
-      <p>
-        {props.name} <span>Ghc{props.price}</span>
-      </p>
+      <div className="list">
+        <input type="checkbox" />
+        <p>
+          {props.name} <span>Ghc{props.price}</span>
+        </p>
+        <button onClick={props.id}>X</button>
+      </div>
     </>
   );
 }

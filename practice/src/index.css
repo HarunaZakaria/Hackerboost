@@ -3,3 +3,11 @@
   margin: 0;
   box-sizing: border-box;
 }
+.list {
+  display: flex;
+  gap: 5px;
+}
+.list button {
+  border: none;
+  background: none;
+}
