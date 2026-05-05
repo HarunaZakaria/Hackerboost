@@ -1,17 +1,7 @@
-import QuizComponent from "./quiz";
-
+import Quiz from "./quiz";
 
 function App() {
-  
-
- 
- 
-
-  return (
-    <>
-      <QuizComponent />
-    </>
-  );
+  return <Quiz />;
 }
 
 export default App;
