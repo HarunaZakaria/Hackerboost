@@ -34,44 +34,6 @@ function Navbar() {
           ))}
         </div>
 
-        {/* Mobile overlay backdrop — only rendered when menu is open */}
-        {mobileMenuOpen && (
-          <div
-            className="mobile-overlay"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        )}
-
-        {/* Mobile slide-in drawer — always in DOM, moved with transform */}
-        <div
-          className="nav-links-mobile"
-          style={{
-            transform: mobileMenuOpen ? "translateX(0)" : "translateX(110%)",
-            visibility: mobileMenuOpen ? "visible" : "hidden",
-          }}
-        >
-          <div className="mobile-menu-header">
-            <span className="mobile-menu-title">Menu</span>
-            <button
-              className="mobile-close-btn"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              ✕
-            </button>
-          </div>
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`mobile-nav-link ${location.pathname === link.path ? "active" : ""}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
         <div className="navbar-actions">
           <Link to="/cart" className="cart-icon-btn" id="cart-nav-btn">
             <svg
@@ -106,6 +68,20 @@ function Navbar() {
             </span>
           </button>
         </div>
+      </div>
+
+      {/* Mobile horizontal dropdown row */}
+      <div className={`nav-links-mobile${mobileMenuOpen ? " open" : ""}`}>
+        {navLinks.map((link) => (
+          <Link
+            key={link.path}
+            to={link.path}
+            className={`mobile-nav-link ${location.pathname === link.path ? "active" : ""}`}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
     </nav>
   );
