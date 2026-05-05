@@ -10,6 +10,7 @@ function App() {
   function handleDelete(id) {
     setNewItem((item) => newItem.filter((item) => item.id !== id));
   }
+
   return (
     <>
       <Header />

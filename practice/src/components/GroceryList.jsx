@@ -8,6 +8,7 @@ export default function GroceryList({ newItem, deleteItem }) {
           <List
             name={grocery.name}
             price={grocery.price}
+            bought={grocery.bought}
             id={() => deleteItem(grocery.id)}
           />
         </div>

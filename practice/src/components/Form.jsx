@@ -6,17 +6,18 @@ export default function Form({ newItem, setNewItem }) {
     id: uuidv4(),
     name: "",
     price: 0,
+    bought: false,
   });
 
   //handleGroceryName
   function handleGroceryName(e) {
     e.preventDefault();
     setNewItem((newItem) => [...newItem, items]);
-   setItems({
-    id: uuidv4(),
-    name: "",
-    price: 0,
-   })
+    setItems({
+      id: uuidv4(),
+      name: "",
+      price: 0,
+    });
   }
   return (
     <>
