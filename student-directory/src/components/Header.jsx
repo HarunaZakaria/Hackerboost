@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <>
-      <h1>Students Profile Directory</h1>
+      <h1 className="heading">Students Profile </h1>
     </>
   );
 }

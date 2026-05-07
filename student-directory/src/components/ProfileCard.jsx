@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-export default function ProfileCard({ student }) {
+export default function ProfileCard({ student, onToggle }) {
+  const { name, track, bio, skillLevel, isActive } = student;
   return (
-    <>
-      <h2>{student.name}</h2>
-      <p>{student.track}</p>
-      <p>{student.bio}</p>
-      <p>{student.level}</p>
-      <button>{student.isActive ? "Active" : "Inactive"}</button>
-    </>
+    <div className="student">
+      <h2>{name}</h2>
+      <h3>{track}</h3>
+      <p>{bio}</p>
+      <p>{skillLevel}</p>
+      <button onClick={() => onToggle(student.id)}>
+        {isActive ? "Activate" : "Deactivate"}
+      </button>
+    </div>
   );
 }

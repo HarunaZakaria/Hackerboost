@@ -3,3 +3,25 @@
   padding: 0;
   box-sizing: border-box;
 }
+.heading {
+  text-align: center;
+  padding: 15px 0;
+}
+.students {
+  display: grid;
+}
+.student {
+  padding: 10px;
+  background-color: wheat;
+  margin: 10px auto;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px 0;
+  background-color: grey;
+  color:white;
+  opacity: 78%;
+}
