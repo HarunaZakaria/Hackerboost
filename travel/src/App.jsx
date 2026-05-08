@@ -5,7 +5,6 @@ import PackingList from "./components/PackingList";
 import Stats from "./components/Stats";
 import Form from "./components/Form";
 
-
 function App() {
   //acreate items
   const [items, setItems] = useState([]);
@@ -33,7 +32,7 @@ function App() {
           deleteItem={deleteItem}
           onToggle={toggleItem}
         />
-        <Stats />
+        <Stats items={items} />
       </div>
     </>
   );
