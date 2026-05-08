@@ -7,9 +7,7 @@
   text-align: center;
   padding: 15px 0;
 }
-.students {
-  display: grid;
-}
+
 .student {
   padding: 10px;
   background-color: wheat;
@@ -17,11 +15,37 @@
   width: 250px;
   border-radius: 5px;
 }
-
+.name {
+  font-weight: bold;
+}
+.stud-skill-btn {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+.stud-skill-btn button {
+  border: none;
+  padding: 5px 8px;
+  border-radius: 3px;
+  transition: all 1s;
+}
+.stud-skill-btn button:hover {
+  background-color: gray;
+  color: white;
+}
 .footer {
   text-align: center;
   padding: 15px 0;
   background-color: grey;
-  color:white;
+  color: white;
   opacity: 78%;
+}
+/* Desktop and Tablet view */
+@media (min-width: 768px) {
+  .students {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100vw;
+    height: 100vh;
+  }
 }
