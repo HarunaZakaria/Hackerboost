@@ -1,7 +1,13 @@
+import FormAddFriend from "./components/FormAddFriend";
+import FormSplitBill from "./components/FormSplitBill";
+import FriendsList from "./components/FriendsList";
+
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <FriendsList />
+      <FormAddFriend />
+      <FormSplitBill />
     </>
   );
 }
