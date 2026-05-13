@@ -1,7 +1,13 @@
 export default function FormAddFriend() {
   return (
     <>
-      <h2>Add friend</h2>
+      <form className="form-add-friend">
+        <label>Friend Name</label>
+        <input type="text" placeholder="Friend name" />
+        <label> Image Url</label>
+        <input type="text" />
+        <button>Add</button>
+      </form>
     </>
   );
 }
