@@ -1,7 +1,18 @@
-export default function Friend({photo, name, balance, children}) {
+import Button from "./Button";
+
+export default function Friend({ friend, selectedFriend, onSelection }) {
+  const { name, image, balance } = friend;
+  const isSelected = selectedFriend?.id === friend.id;
   return (
     <>
-      <h1>Friend</h1>
+      <li className={isSelected ? "selected" : ""}>
+        <img src={image} alt={name} />
+        <h3>{name}</h3>
+        <p>{balance}</p>
+        <Button onHandleClick={() => onSelection(friend)}>
+          {isSelected ? "Close" : "Select"}
+        </Button>
+      </li>
     </>
   );
 }

@@ -1,4 +1,4 @@
-export default function FormSplitBill() {
+export default function FormSplitBill({selectedFriend}) {
   return (
     <>
       <form className="form-split-bill">
