@@ -3,3 +3,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+.heading {
+  text-align: center;
+  padding: 20px 0;
+  opacity: 77%;
+}

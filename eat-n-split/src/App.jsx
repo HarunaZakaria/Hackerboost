@@ -4,6 +4,7 @@ import FormAddFriend from "./components/FormAddFriend";
 import FormSplitBill from "./components/FormSplitBill";
 import FriendsList from "./components/FriendsList";
 import initialFriends from "./data";
+import Header from "./components/Header";
 
 function App() {
   const [friends, setFriends] = useState(initialFriends);
@@ -34,6 +35,7 @@ function App() {
   }
   return (
     <div className="app">
+      <Header />
       <div className="sidebar">
         <FriendsList
           friends={friends}
