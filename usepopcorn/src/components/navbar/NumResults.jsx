@@ -1,7 +1,7 @@
 export default function NumResults({ movies }) {
   return (
     <>
-      <p>Results</p>
+      <p>{movies.length} results</p>
     </>
   );
 }
