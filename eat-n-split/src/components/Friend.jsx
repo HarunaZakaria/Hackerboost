@@ -6,7 +6,7 @@ export default function Friend({ friend, selectedFriend, onSelection }) {
   return (
     <>
       <li className={isSelected ? "selected" : ""}>
-        <img src={image} alt={name} />
+        <img src={image} alt={name} className="image" />
         <h3>{name}</h3>
         <p>{balance}</p>
         <Button onHandleClick={() => onSelection(friend)}>

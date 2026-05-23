@@ -3,8 +3,31 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: antiquewhite;
+}
 .heading {
   text-align: center;
   padding: 20px 0;
   opacity: 77%;
+}
+.sidebar {
+  width: 300px;
+
+  padding: 15px;
+  margin: auto;
+}
+li {
+  list-style: none;
+  padding: 10px;
+}
+.image {
+  border-radius: 50%;
+  border: 2px solid black;
+}
+.button{
+  border: none;
+  padding: 5px 8px;
+  background-color: aquamarine;
+  border-radius: 4px;
 }
