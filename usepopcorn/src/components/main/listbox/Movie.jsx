@@ -1,8 +1,17 @@
 export default function Movie({ movie }) {
-  const { title, year, poster } = movie;
+ 
   return (
     <div>
-      <p>{title}</p>
+      <li key={movie.imdbID}>
+        <img src={movie.Poster} alt={`${movie.Title} poster`} />
+        <h3>{movie.Title}</h3>
+        <div>
+          <p>
+            <span>🗓</span>
+            <span>{movie.Year}</span>
+          </p>
+        </div>
+      </li>
     </div>
   );
 }
