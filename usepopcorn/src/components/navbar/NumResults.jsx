@@ -1,7 +1,9 @@
 export default function NumResults({ movies }) {
   return (
     <>
-      <p>{movies.length} results</p>
+      <p className="num-results">
+        Found <strong>{movies.length}</strong> results
+      </p>
     </>
   );
 }

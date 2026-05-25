@@ -1,7 +1,8 @@
 export default function Logo() {
   return (
-    <>
-      <h1>Usepopcorn</h1>
-    </>
+    <div className="logo">
+      <span role="img">🍿</span>
+      <h1>usePopcorn</h1>
+    </div>
   );
 }
