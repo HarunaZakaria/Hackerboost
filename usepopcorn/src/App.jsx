@@ -9,6 +9,7 @@ import Navbar from "./components/navbar/Navbar";
 import NumResults from "./components/navbar/NumResults";
 import Search from "./components/navbar/Seach";
 import { tempMovieData, tempWatchedData } from "./data";
+import StartRating from "./components/rating/StarRating";
 
 function App() {
   const [movies, setMovies] = useState(tempMovieData);
@@ -24,11 +25,10 @@ function App() {
         <Box>
           <MovieList movies={movies} />
         </Box>
+        <StartRating />
         <Box>
-          <>
-            <WatchedSummary watched={watched} />
-            <WatchedMovieList watched={watched} />
-          </>
+          <WatchedSummary watched={watched} />
+          <WatchedMovieList watched={watched} />
         </Box>
       </Main>
     </>
