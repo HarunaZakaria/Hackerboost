@@ -25,7 +25,6 @@ function App() {
         <Box>
           <MovieList movies={movies} />
         </Box>
-        <StartRating />
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMovieList watched={watched} />
