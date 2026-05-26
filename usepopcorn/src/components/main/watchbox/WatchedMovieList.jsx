@@ -1,6 +1,6 @@
 import WatchedMovie from "./WatchMovie";
 
-export default function WatchedMovieList({ watched }) {
+export default function WatchedMovieList({ watched, handleDeleteWatched }) {
   return (
     <ul className="list">
       {watched.map((movie) => (
@@ -20,6 +20,12 @@ export default function WatchedMovieList({ watched }) {
               <span>⏳</span>
               <span>{movie.runtime} min</span>
             </p>
+            <button
+              className="delete-watched"
+              onClick={() => handleDeleteWatched(movie.imdbID)}
+            >
+              x
+            </button>
           </div>
         </li>
       ))}
