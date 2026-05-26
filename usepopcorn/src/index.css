@@ -188,7 +188,7 @@ body {
   gap: 0.8rem;
 }
 
-.btn-delete {
+.delete-watched {
   position: absolute;
   right: 2.4rem;
 
@@ -202,6 +202,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
+  
 }
 
 .btn-delete:hover {
