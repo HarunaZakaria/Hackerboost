@@ -31,7 +31,7 @@ export default function StartRating({
     lineHeight: "1",
     margin: "0",
     color,
-    fontSize: `${size / 1.5}px`,
+    fontSize: `${size / 3}px`,
   };
   return (
     <div style={containerStyle}>
