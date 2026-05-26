@@ -1,4 +1,4 @@
-export default function FullStarSVG() {
+export default function FullStarSVG({color}) {
   return (
     <>
       <svg

@@ -1,4 +1,4 @@
-export default function EmptyStarSVG() {
+export default function EmptyStarSVG({color}) {
   return (
     <>
       <svg

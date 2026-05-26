@@ -1,5 +1,6 @@
+import StartRating from "../../rating/StarRating";
+
 export default function Movie({ movie }) {
- 
   return (
     <div>
       <li key={movie.imdbID}>
@@ -11,6 +12,10 @@ export default function Movie({ movie }) {
             <span>{movie.Year}</span>
           </p>
         </div>
+        <StartRating
+          maxRating={5}
+          messages={["Terrible", "Bad", "Okay", "Good", "Amzing"]}
+        />
       </li>
     </div>
   );
