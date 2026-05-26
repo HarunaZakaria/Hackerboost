@@ -14,6 +14,11 @@ import StartRating from "./components/rating/StarRating";
 function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
+
+  //handle delete watched
+  function handleDeleteWatched(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+  }
   return (
     <>
       <Navbar>
@@ -27,7 +32,10 @@ function App() {
         </Box>
         <Box>
           <WatchedSummary watched={watched} />
-          <WatchedMovieList watched={watched} />
+          <WatchedMovieList
+            watched={watched}
+            handleDeleteWatched={handleDeleteWatched}
+          />
         </Box>
       </Main>
     </>
