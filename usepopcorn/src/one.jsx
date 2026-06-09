@@ -11,6 +11,7 @@ import Search from "./components/navbar/Seach";
 import { tempMovieData, tempWatchedData } from "./data";
 import StartRating from "./components/rating/StarRating";
 import Loader from "./components/Loader";
+import ErrorMessage from "./components/ErrorMesage";
 
 const key = "a468643e";
 
@@ -58,7 +59,11 @@ function One() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
+        <Box>
+          {isLoading && <Loader />}
+          {!isLoading && !error && <MovieList movies={movies} />}
+          {error && <ErrorMessage message={error} />}
+        </Box>
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMovieList
