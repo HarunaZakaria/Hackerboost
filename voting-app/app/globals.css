@@ -1,0 +1,283 @@
+/* @import "tailwindcss"; */
+
+/* =========================================
+   BASE & RESET
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* =========================================
+   APP LAYOUT (Step 4 - Composition)
+   ========================================= */
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.main-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start; /* Prevents columns from stretching to match height */
+}
+
+/* Left column takes up more space */
+.polls-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Right column is narrower */
+.leaderboard {
+  flex: 1;
+  position: sticky; /* Keeps leaderboard visible while scrolling polls */
+  top: 20px;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+.header {
+  text-align: center;
+  padding: 30px 20px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* =========================================
+   CARD - Wrapper Component (Step 4)
+   ========================================= */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   POLL CARD
+   ========================================= */
+.poll-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #f0f2f5;
+  padding-bottom: 10px;
+}
+
+/* =========================================
+   VOTE BAR - The Visual Component (Step 4)
+   ========================================= */
+.vote-bar-container {
+  margin-bottom: 16px;
+}
+
+.vote-bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.vote-bar-label span:last-child {
+  color: #666;
+  font-weight: 400;
+}
+
+.vote-bar-track {
+  background-color: #e9ecef;
+  border-radius: 8px;
+  height: 14px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.vote-bar-fill {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  height: 100%;
+  border-radius: 8px;
+
+  /* React re-renders the width attribute dynamically via state,
+     this CSS transition makes the bar animate smoothly! */
+  transition: width 0.5s ease-in-out;
+}
+
+.vote-btn {
+  background-color: #f0f2f5;
+  border: 1px solid #d1d5db;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.vote-btn:hover {
+  background-color: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+/* =========================================
+   LEADERBOARD
+   ========================================= */
+.leaderboard h2 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.leaderboard ol {
+  list-style: none;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: transform 0.2s;
+}
+
+.leaderboard-item:hover {
+  transform: translateX(4px);
+}
+
+/* Highlight the #1 spot */
+.leader {
+  background: linear-gradient(135deg, #fff9c4 0%, #fff176 100%);
+  border: 1px solid #fdd835;
+  font-weight: bold;
+}
+
+.rank {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #667eea;
+  margin-right: 12px;
+  min-width: 30px;
+}
+
+.name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.votes {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.source {
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}
+
+.total {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #667eea;
+  border-top: 2px solid #f0f2f5;
+  padding-top: 15px;
+}
+
+/* =========================================
+   NOTIFICATION - Children Prop (Step 4)
+   ========================================= */
+.notification {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.notification-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.notification-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.notification-highlight {
+  background-color: #e8f0fe;
+  color: #1967d2;
+  border: 1px solid #d2e3fc;
+}
+
+/* =========================================
+   LOADING STATE (Step 5)
+   ========================================= */
+.loading-card {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  border: 6px solid #f0f2f5;
+  border-top: 6px solid #667eea;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Mobile)
+   ========================================= */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column; /* Stacks the columns on mobile */
+  }
+
+  .leaderboard {
+    position: static; /* Removes sticky on mobile */
+    width: 100%;
+  }
+}
