@@ -18,6 +18,7 @@ function One() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   //handle delete watched
   function handleDeleteWatched(id) {
@@ -27,13 +28,25 @@ function One() {
   //fech data from API
   useEffect(() => {
     async function fetchMovies() {
-      setIsLoading(true);
-      const res = await fetch(
-        `https://www.omdbapi.com/?apikey=${key}&s=interstellar`,
-      );
-      const data = await res.json();
-      setMovies(data.Search);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        setError("");
+        const res = await fetch(
+          `https://www.omdbapi.com/?apikey=${key}&s=interstellar`,
+        );
+        if (!res.ok) {
+          throw new Error("Something went wrong with fetching movies");
+        }
+        const data = await res.json();
+        if (data.Response === "False") {
+          throw new Error("No movie found");
+        }
+        setMovies(data.Search);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchMovies();
   }, []);
