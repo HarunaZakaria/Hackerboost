@@ -10,12 +10,14 @@ import NumResults from "./components/navbar/NumResults";
 import Search from "./components/navbar/Seach";
 import { tempMovieData, tempWatchedData } from "./data";
 import StartRating from "./components/rating/StarRating";
+import Loader from "./components/Loader";
 
 const key = "a468643e";
 
 function One() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
+  const [isLoading, setIsLoading] = useState(false);
 
   //handle delete watched
   function handleDeleteWatched(id) {
@@ -24,9 +26,16 @@ function One() {
 
   //fech data from API
   useEffect(() => {
-    fetch(`https://www.omdbapi.com/?apikey=${key}&s=interstellar`)
-      .then((res) => res.json())
-      .then((data) => setMovies(data.Search));
+    async function fetchMovies() {
+      setIsLoading(true);
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${key}&s=interstellar`,
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+      setIsLoading(false);
+    }
+    fetchMovies();
   }, []);
   return (
     <>
@@ -36,9 +45,7 @@ function One() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <Box>
-          <MovieList movies={movies} />
-        </Box>
+        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMovieList
