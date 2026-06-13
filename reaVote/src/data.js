@@ -1,6 +1,7 @@
 const polls = [
   {
     id: 1,
+    role: "Frontend Frameworks",
     question: "Best Frontend Framework?",
     options: [
       { id: 1, label: "React", votes: 12 },
@@ -10,6 +11,7 @@ const polls = [
   },
   {
     id: 2,
+    role: "Backend Frameworks",
     question: "Best Backend Languages?",
     options: [
       { id: 1, label: "Python", votes: 2 },
