@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
       <PollCard polls={polls} setPolls={setPolls} />
-      <LeaderBoard />
+      <LeaderBoard polls={polls} />
     </>
   );
 }
