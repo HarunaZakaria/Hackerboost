@@ -9,8 +9,10 @@ function App() {
   return (
     <>
       <Header />
-      <PollCard polls={polls} setPolls={setPolls} />
-      <LeaderBoard polls={polls} />
+      <div className="main">
+        <PollCard polls={polls} setPolls={setPolls} />
+        <LeaderBoard polls={polls} />
+      </div>
     </>
   );
 }
