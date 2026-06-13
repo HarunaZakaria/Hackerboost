@@ -1,18 +1,23 @@
 import React from "react";
 
 function LeaderBoard({ polls }) {
+  //   polls.map(({ id, role, question, options }) => {
+  //     const sorted = [...options].sort((a, b) => b.votes - a.votes);
+  //     console.log(sorted);
+  //   });
   return (
     <div className="leaderboard">
-      <h1>Leaderboard</h1>
-
+      <h2>Leaderboard</h2>
       {polls.map((poll) => (
         <ul key={poll.id}>
-          <h2>{poll.role}</h2>
-          {poll.options.map((option) => (
-            <li key={option.id}>
-              {option.label} - {option.votes}
-            </li>
-          ))}
+          <h3>{poll.role}</h3>
+          {[...poll.options]
+            .sort((a, b) => b.votes - a.votes)
+            .map((option) => (
+              <li key={option.id}>
+                {option.label} - {option.votes}
+              </li>
+            ))}
         </ul>
       ))}
     </div>
