@@ -4,13 +4,11 @@ import { IOption, IPolData } from "../types";
 
 function PollCard({ pollData }: IPolData) {
   const { question, options } = pollData;
-  const [votes, setVotes] = useState(options.map((o) => o.votes));
+  const [polls, setPolls] = useState(pollData);
 
   //handle vote increment
-  function handleVote(index: number) {
-    const curVotes = [...votes];
-    const voteNum = curVotes[index] + 1;
-    console.log(voteNum);
+  function handleVote(index:number) {
+   //setPolls((prevPolls) => prevPolls.map((poll) => poll.id === pollData.id ? {...poll, options: poll.options.map((option) => option.id === option.id? {...option, votes: option.vote + 1} : option),}: poll)
   }
   return (
     <div className="poll-card">

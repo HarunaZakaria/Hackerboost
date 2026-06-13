@@ -6,6 +6,7 @@ export interface IOption {
 
 export interface IPolData {
   pollData: {
+    id: number;
     question: string;
     options: IOption[];
   };

@@ -29,6 +29,7 @@ body {
   display: flex;
   gap: 24px;
   align-items: flex-start; /* Prevents columns from stretching to match height */
+  
 }
 
 /* Left column takes up more space */
