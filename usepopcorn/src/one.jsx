@@ -20,6 +20,7 @@ function One() {
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
 
   //handle delete watched
   function handleDeleteWatched(id) {
@@ -28,12 +29,19 @@ function One() {
 
   //fech data from API
   useEffect(() => {
+    //don't fetch for short query
+    if (query.length < 3) {
+      setMovies([]);
+      setError("");
+      return;
+    }
+
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
         const res = await fetch(
-          `https://www.omdbapi.com/?apikey=${key}&s=interstellar`,
+          `https://www.omdbapi.com/?apikey=${key}&s=${query}`,
         );
         if (!res.ok) {
           throw new Error("Something went wrong with fetching movies");
@@ -50,12 +58,12 @@ function One() {
       }
     }
     fetchMovies();
-  }, []);
+  }, [query]);
   return (
     <>
       <Navbar>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </Navbar>
       <Main>
