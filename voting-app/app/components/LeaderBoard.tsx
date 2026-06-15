@@ -1,23 +1,39 @@
 import React from "react";
-import { IOption, IPolData } from "../types";
+import { IPolData, IPolls } from "../types";
+import Card from "./Card";
+import Notification from "./Notification";
 
-function LeaderBoard({ pollData }: IPolData) {
-  const { options } = pollData;
+function LeaderBoard({ polls }: IPolls) {
+  const allOptions = (polls as unknown as IPolData[])
+    .flatMap((poll: any) => poll?.options ?? [])
+    .sort((a: any, b: any) => b.votes - a.votes);
 
-  //sort votes in decending order
-  const sorted = [...options].sort((a, b) => b.votes - a.votes);
+  const totalVotes = allOptions.reduce((sum, option) => sum + option.votes, 0);
+  const topOption = allOptions[0];
 
   return (
-    <div className="leaderboard">
-      <h1>Leaderboard</h1>
-      <ul>
-        {sorted.map((option: IOption) => (
-          <li key={option.id}>
-            {option.label} - {option.votes} votes
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Card className="leaderboard">
+      <>
+        <h1>Leaderboard</h1>
+        {topOption && (
+          <Notification type="hghlight">
+            Loading: {topOption.label} with {topOption.votes} votes
+          </Notification>
+        )}
+        <ol>
+          {allOptions.map((option, index) => (
+            <li
+              key={option.id}
+              className={`leaderboard-item ${index === 0 ? "leader" : ""}`}
+            >
+              <span className="rank">#{index + 1}</span>
+              <span className="votes">{option.label}</span>
+              {/* <span className="source">{option.poll.question}</span> */}
+            </li>
+          ))}
+        </ol>
+      </>
+    </Card>
   );
 }
 
