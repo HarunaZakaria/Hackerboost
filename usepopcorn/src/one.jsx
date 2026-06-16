@@ -12,6 +12,7 @@ import { tempMovieData, tempWatchedData } from "./data";
 import StartRating from "./components/rating/StarRating";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMesage";
+import MovieDetails from "./components/MovieDetails";
 
 const key = "a468643e";
 
@@ -21,10 +22,21 @@ function One() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
+
+  //handle selected movie id
+  function handleSelectMovieId(id) {
+    setSelectedId(id);
+  }
 
   //handle delete watched
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+  }
+
+  //handleCloseMovie
+  function handleCloseMovie() {
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
 
   //fech data from API
@@ -69,15 +81,26 @@ function One() {
       <Main>
         <Box>
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList movies={movies} onSelectMovie={handleSelectMovieId} />
+          )}
           {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedMovieList
-            watched={watched}
-            handleDeleteWatched={handleDeleteWatched}
-          />
+          {selectedId ? (
+            <MovieDetails
+              selectedId={selectedId}
+              onCloseMovie={handleCloseMovie}
+            />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMovieList
+                watched={watched}
+                handleDeleteWatched={handleDeleteWatched}
+              />
+            </>
+          )}
         </Box>
       </Main>
     </>
