@@ -8,6 +8,7 @@ export default function StartRating({
   className = "",
   messages = [],
   defaultRating = 0,
+  onSetRating
 }) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);

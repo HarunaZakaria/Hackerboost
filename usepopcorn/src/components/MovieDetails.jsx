@@ -3,9 +3,15 @@ import Loader from "./Loader";
 import StartRating from "./rating/StarRating";
 
 const key = "a468643e";
-export default function MovieDetails({ selectedId, onCloseMovie }) {
+export default function MovieDetails({
+  selectedId,
+  onCloseMovie,
+  onAddWatched,
+  watched,
+}) {
   const [movies, setMovies] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
 
   useEffect(() => {
     async function getMovieDeails() {
@@ -33,8 +39,27 @@ export default function MovieDetails({ selectedId, onCloseMovie }) {
     Director: director,
     Genre: genre,
   } = movies;
+
+  function handleAdd() {
+    const newWatchedMovie = {
+      imdbID: selectedId,
+      Title: title,
+      Year: year,
+      Poster: poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ")[0]), // "148 min" → 148
+      userRating,
+    };
+    onAddWatched(newWatchedMovie);
+    onCloseMovie();
+  }
+
+  const isWatched = watched.map((m) => m.imdbID).includes(selectedId);
+  const watchedUserRating = watched.find(
+    (m) => m.imdbID === selectedId,
+  )?.userRating;
   return (
-    <did className="details">
+    <div className="details">
       {/* <button className="btn-back" onClick={onCloseMovie}>
         &larr
       </button> */}
@@ -60,10 +85,14 @@ export default function MovieDetails({ selectedId, onCloseMovie }) {
         <p>Starring{actors}</p>
         <p>Directed by {director}</p>
         <div className="rating">
-          <StartRating maxRating={10} size={24} />
+          <StartRating maxRating={10} size={24} onSetRating={setUserRating} />
         </div>
+        {userRating > 0 && (
+          <button className="btn-add" onClick={handleAdd}>
+            Add to list
+          </button>
+        )}
       </section>
-      <p>Seleceted Movie ID:{selectedId} </p>
-    </did>
+    </div>
   );
 }

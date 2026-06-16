@@ -35,7 +35,7 @@ function One() {
   }
 
   //handleCloseMovie
-  function handleCloseMovie() {
+  function handleCloseMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
 
@@ -71,6 +71,11 @@ function One() {
     }
     fetchMovies();
   }, [query]);
+
+  //handle add to watch
+  function handleAddWatched(movie) {
+    setWatched((watched) => [...watched, movie]);
+  }
   return (
     <>
       <Navbar>
@@ -91,6 +96,8 @@ function One() {
             <MovieDetails
               selectedId={selectedId}
               onCloseMovie={handleCloseMovie}
+              onAddWatched={handleAddWatched}
+              watched={watched}
             />
           ) : (
             <>
