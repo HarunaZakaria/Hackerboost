@@ -48,12 +48,15 @@ function One() {
       return;
     }
 
+    const controller = new AbortController();
+
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
         const res = await fetch(
           `https://www.omdbapi.com/?apikey=${key}&s=${query}`,
+          { signal: controller.signal },
         );
         if (!res.ok) {
           throw new Error("Something went wrong with fetching movies");
@@ -70,6 +73,9 @@ function One() {
       }
     }
     fetchMovies();
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   //handle add to watch

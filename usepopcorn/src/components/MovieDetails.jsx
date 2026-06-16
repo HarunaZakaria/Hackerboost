@@ -58,6 +58,17 @@ export default function MovieDetails({
   const watchedUserRating = watched.find(
     (m) => m.imdbID === selectedId,
   )?.userRating;
+
+  //change title to movie name
+  useEffect(() => {
+    if (!title) return;
+    document.title = `Movie | ${title}`;
+
+    return () => {
+      document.title = "usePopcorn";
+    };
+  }, [title]);
+
   return (
     <div className="details">
       {/* <button className="btn-back" onClick={onCloseMovie}>
