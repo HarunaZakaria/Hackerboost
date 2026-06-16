@@ -12,10 +12,10 @@ export default function Movie({ movie, onSelectMovie }) {
             <span>{movie.Year}</span>
           </p>
         </div>
-        <StartRating
+        {/* <StartRating
           maxRating={5}
           messages={["Terrible", "Bad", "Okay", "Good", "Amzing"]}
-        />
+        /> */}
       </li>
     </div>
   );
