@@ -18,11 +18,22 @@ const key = "a468643e";
 
 function One() {
   const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  // const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+
+  //Load from localStorage on the initial render
+  const [watched, setWatched] = useState(() => {
+    const storedWatched = localStorage.getItem("watched");
+    return storedWatched ? JSON.parse(storedWatched) : [];
+  });
+
+//save to localStorage whenever watched changes
+ useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  }, [watched]);
 
   //handle selected movie id
   function handleSelectMovieId(id) {
