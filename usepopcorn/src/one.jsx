@@ -14,6 +14,7 @@ import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMesage";
 import MovieDetails from "./components/MovieDetails";
 import { useMovies } from "./useMovies";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 
 function One() {
@@ -22,15 +23,7 @@ function One() {
   const [selectedId, setSelectedId] = useState(null);
 
   //Load from localStorage on the initial render
-  const [watched, setWatched] = useState(() => {
-    const storedWatched = localStorage.getItem("watched");
-    return storedWatched ? JSON.parse(storedWatched) : [];
-  });
-
-//save to localStorage whenever watched changes
- useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify(watched));
-  }, [watched]);
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   //handle selected movie id
   function handleSelectMovieId(id) {
