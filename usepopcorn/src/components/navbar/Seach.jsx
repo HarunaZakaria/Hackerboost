@@ -1,11 +1,16 @@
 import { useRef, useState, useEffect } from "react";
+import { useKey } from "../../useKey";
 
 export default function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  useEffect(() => {
+  useKey("Enter", () => {
+    // Don't do anything if search input is already focused
+    if (document.activeElement === inputEl.current) return;
+
     inputEl.current.focus();
-  }, []);
+    setQuery("");
+  });
   return (
     <input
       ref={inputEl}
