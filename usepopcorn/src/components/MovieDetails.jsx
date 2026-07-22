@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import StartRating from "./rating/StarRating";
+import { useKey } from "../useKey";
 
 const key = "a468643e";
+
 export default function MovieDetails({
   selectedId,
   onCloseMovie,
@@ -18,6 +20,8 @@ export default function MovieDetails({
   useEffect(() => {
     if (userRating) countRef.current++;
   }, [userRating]);
+
+  useKey("Escape", onCloseMovie);
 
   useEffect(() => {
     async function getMovieDeails() {
