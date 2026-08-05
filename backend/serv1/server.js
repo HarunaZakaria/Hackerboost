@@ -1,11 +1,27 @@
 const express = require("express");
+const crypto = require("crypto");
+const { mongo, default: mongoose } = require("mongoose");
+const dotenv = require("dotenv");
+const pizzaModel = require("./src/models/pizza.model");
+
+dotenv.config();
+
 const app = express();
 const port = 5000;
+
+//middle wear
+
+app.use(express.json());
+
+//connect to mongoDB
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ Connection error:", err));
 
 // Pizza data - same pizzas from the Pizza Menu project!
 const pizzas = [
   {
-    id: 1,
     name: "Focaccia",
     ingredients: "Bread with Italian olive oil and rosemary",
     price: 6,
@@ -13,7 +29,6 @@ const pizzas = [
     photoName: "focaccia.jpg",
   },
   {
-    id: 2,
     name: "Margherita",
     ingredients: "Tomato and mozarella",
     price: 10,
@@ -21,7 +36,6 @@ const pizzas = [
     photoName: "margherita.jpg",
   },
   {
-    id: 3,
     name: "Spinaci",
     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
     price: 12,
@@ -29,7 +43,6 @@ const pizzas = [
     photoName: "spinaci.jpg",
   },
   {
-    id: 4,
     name: "Funghi",
     ingredients: "Tomato, mozarella, mushrooms, and onion",
     price: 12,
@@ -37,7 +50,6 @@ const pizzas = [
     photoName: "funghi.jpg",
   },
   {
-    id: 5,
     name: "Salamino",
     ingredients: "Tomato, mozarella, and pepperoni",
     price: 15,
@@ -45,7 +57,6 @@ const pizzas = [
     photoName: "salamino.jpg",
   },
   {
-    id: 6,
     name: "Prosciutto",
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
@@ -57,6 +68,17 @@ const pizzas = [
 //root route
 app.get("/", (req, res) => {
   res.send("Hello Harunzy at Hackerboost");
+});
+
+//post request
+app.post("/api/pizzas", async (req, res) => {
+  console.log(req.body);
+
+  const newPizza = await pizzaModel.create(req.body);
+  res.status(200).json({
+    status: true,
+    pizza: newPizza,
+  });
 });
 
 app.get("/about", (req, res) => {
