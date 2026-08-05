@@ -1,6 +1,17 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const app = express();
 const port = 8000;
+
+//connect to mongoDB
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ Connection error:", err));
 
 const students = [
   {
