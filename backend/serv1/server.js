@@ -5,6 +5,7 @@ const port = 5000;
 // Pizza data - same pizzas from the Pizza Menu project!
 const pizzas = [
   {
+    id: 1,
     name: "Focaccia",
     ingredients: "Bread with Italian olive oil and rosemary",
     price: 6,
@@ -12,6 +13,7 @@ const pizzas = [
     photoName: "focaccia.jpg",
   },
   {
+    id: 2,
     name: "Margherita",
     ingredients: "Tomato and mozarella",
     price: 10,
@@ -19,6 +21,7 @@ const pizzas = [
     photoName: "margherita.jpg",
   },
   {
+    id: 3,
     name: "Spinaci",
     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
     price: 12,
@@ -26,6 +29,7 @@ const pizzas = [
     photoName: "spinaci.jpg",
   },
   {
+    id: 4,
     name: "Funghi",
     ingredients: "Tomato, mozarella, mushrooms, and onion",
     price: 12,
@@ -33,6 +37,7 @@ const pizzas = [
     photoName: "funghi.jpg",
   },
   {
+    id: 5,
     name: "Salamino",
     ingredients: "Tomato, mozarella, and pepperoni",
     price: 15,
@@ -40,6 +45,7 @@ const pizzas = [
     photoName: "salamino.jpg",
   },
   {
+    id: 6,
     name: "Prosciutto",
     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
     price: 18,
@@ -58,16 +64,21 @@ app.get("/about", (req, res) => {
 });
 
 //get a pizza by id not working for now
-// app.get("/api/pizzas/:id", (req, res) => {
-//   const pizzaId = req.params.id;
-//   const pizza = pizzas.find((p) => p.id === pizzaId);
-//   console.log(pizza);
+app.get("/api/pizzas/:id", (req, res) => {
+  const pizzaId = req.params.id;
+  const pizza = pizzas.find((p) => p.id === parseInt(pizzaId));
+  if (!pizza) {
+    return res.status(404).json({
+      message: "Pizza not found",
+    });
+    res.status(200).json(pizza);
+  }
 
-//   res.json({
-//     status: true,
-//     pizza: pizza,
-//   });
-// });
+  res.json({
+    status: true,
+    pizza: pizza,
+  });
+});
 
 //get a pizza by name
 app.get("/api/pizzas/:name", (req, res) => {
