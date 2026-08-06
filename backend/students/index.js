@@ -1,11 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const studentsModel = require("./src/models/students.model");
 
 dotenv.config();
 
 const app = express();
 const port = 8000;
+
+//middle wears
+app.use(express.json());
 
 //connect to mongoDB
 mongoose
@@ -99,6 +103,15 @@ const students = [
 //root route
 app.get("/", (req, res) => {
   res.send("Hello Students");
+});
+
+//create a new student
+app.post("/api/students", async (req, res) => {
+  const newStudent = await studentsModel.create(req.body);
+  res.status(200).json({
+    status: true,
+    student: newStudent,
+  });
 });
 
 //get all students
