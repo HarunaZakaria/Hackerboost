@@ -1,16 +1,16 @@
+const dotenv = require("dotenv");
 const express = require("express");
 // const crypto = require("crypto");
 const { mongo, default: mongoose } = require("mongoose");
-const dotenv = require("dotenv");
+
 const pizzaModel = require("./src/models/pizza.model");
 
 dotenv.config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //middle wear
-
 app.use(express.json());
 
 //connect to mongoDB
@@ -20,86 +20,70 @@ mongoose
   .catch((err) => console.error("❌ Connection error:", err));
 
 // Pizza data - same pizzas from the Pizza Menu project!
-const pizzas = [
-  {
-    name: "Focaccia",
-    ingredients: "Bread with Italian olive oil and rosemary",
-    price: 6,
-    soldOut: false,
-    photoName: "focaccia.jpg",
-  },
-  {
-    name: "Margherita",
-    ingredients: "Tomato and mozarella",
-    price: 10,
-    soldOut: false,
-    photoName: "margherita.jpg",
-  },
-  {
-    name: "Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
-    price: 12,
-    soldOut: false,
-    photoName: "spinaci.jpg",
-  },
-  {
-    name: "Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
-    price: 12,
-    soldOut: false,
-    photoName: "funghi.jpg",
-  },
-  {
-    name: "Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
-    price: 15,
-    soldOut: true,
-    photoName: "salamino.jpg",
-  },
-  {
-    name: "Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-    price: 18,
-    soldOut: false,
-    photoName: "prosciutto.jpg",
-  },
-];
+// const pizzas = [
+//   {
+//     name: "Focaccia",
+//     ingredients: "Bread with Italian olive oil and rosemary",
+//     price: 6,
+//     soldOut: false,
+//     photoName: "focaccia.jpg",
+//   },
+//   {
+//     name: "Margherita",
+//     ingredients: "Tomato and mozarella",
+//     price: 10,
+//     soldOut: false,
+//     photoName: "margherita.jpg",
+//   },
+//   {
+//     name: "Spinaci",
+//     ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
+//     price: 12,
+//     soldOut: false,
+//     photoName: "spinaci.jpg",
+//   },
+//   {
+//     name: "Funghi",
+//     ingredients: "Tomato, mozarella, mushrooms, and onion",
+//     price: 12,
+//     soldOut: false,
+//     photoName: "funghi.jpg",
+//   },
+//   {
+//     name: "Salamino",
+//     ingredients: "Tomato, mozarella, and pepperoni",
+//     price: 15,
+//     soldOut: true,
+//     photoName: "salamino.jpg",
+//   },
+//   {
+//     name: "Prosciutto",
+//     ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
+//     price: 18,
+//     soldOut: false,
+//     photoName: "prosciutto.jpg",
+//   },
+// ];
 
 //root route
 app.get("/", (req, res) => {
   res.send("Hello Harunzy at Hackerboost");
 });
 
-//post request
+//create a pizza
 app.post("/api/pizzas", async (req, res) => {
-  console.log(req.body);
-
-  const newPizza = await pizzaModel.create(req.body);
-  res.status(200).json({
-    status: true,
-    pizza: newPizza,
-  });
-});
-
-app.get("/about", (req, res) => {
-  res.send("This is about page");
-});
-
-//get a pizza by id not working for now
-app.get("/api/pizzas/:id", (req, res) => {
-  const pizzaId = req.params.id;
-  const pizza = pizzas.find((p) => p.id === parseInt(pizzaId));
-  if (!pizza) {
-    return res.status(404).json({
-      message: "Pizza not found",
+  try {
+    const newPizza = await pizzaModel.create(req.body);
+    res.status(200).json({
+      status: true,
+      pizza: newPizza,
     });
-    res.status(200).json(pizza);
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
   }
-
-  res.json({
-    status: true,
-    pizza: pizza,
-  });
 });
 
 //get a pizza by name
@@ -120,12 +104,22 @@ app.get("/api/pizzas/:name", (req, res) => {
   });
 });
 
-//get all pizzas
-app.get("/api/pizzas", (req, res) => {
+//get all pizzas from database
+app.get("/api/pizzas", async (req, res) => {
+  const pizzas = await pizzaModel.find();
   res.json({
     status: "success",
     total: pizzas.length,
     pizzas: pizzas,
+  });
+});
+
+//get pizza price less than $10
+app.get("/api/cheap", async (req, res) => {
+  const cheapPizza = await pizzaModel.find({ price: { $lte: 10 } });
+  res.status(201).json({
+    status: "Success",
+    pizza: cheapPizza,
   });
 });
 
