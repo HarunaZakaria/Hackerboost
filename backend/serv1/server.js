@@ -166,6 +166,25 @@ app.patch("/api/pizza/:id", async (req, res) => {
     });
   }
 });
+
+//delete data
+app.delete("/api/pizza/:id", async (req, res) => {
+  try {
+    const pizza = await pizzaModel.findByIdAndDelete(req.params.id);
+    if (!pizza) {
+      res.status(404).json({ status: "fail", message: "Pizza not found" });
+    }
+    res.status(204).json({
+      status: "success",
+      pizza: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
 //listen
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
