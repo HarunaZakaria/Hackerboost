@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 // const crypto = require("crypto");
 const { mongo, default: mongoose } = require("mongoose");
-
+const cors = require("cors");
 const pizzaModel = require("./src/models/pizza.model");
 
 dotenv.config();
@@ -11,6 +11,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //middle wear
+app.use("cors");
 app.use(express.json());
 
 //connect to mongoDB
