@@ -116,13 +116,35 @@ app.get("/api/pizzas", async (req, res) => {
 
 //get pizza price less than $10
 app.get("/api/cheap", async (req, res) => {
-  const cheapPizza = await pizzaModel.find({ price: { $lte: 10 } });
-  res.status(201).json({
-    status: "Success",
-    pizza: cheapPizza,
-  });
+  try {
+    const cheapPizza = await pizzaModel.find({ price: { $lte: 10 } });
+    res.status(201).json({
+      status: "Success",
+      pizza: cheapPizza,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
 });
 
+// sort pizza in ascending order
+app.get("/api/sort", async (req, res) => {
+  try {
+    const sortPizza = await pizzaModel.find().sort({ price: 1 });
+    res.status(201).json({
+      status: "succes",
+      pizza: sortPizza,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
 //listen
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
