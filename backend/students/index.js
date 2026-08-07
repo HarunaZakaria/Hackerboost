@@ -17,88 +17,88 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) => console.error("❌ Connection error:", err));
 
-const students = [
-  {
-    firstName: "Adam ",
-    lastName: "Maata",
-    class: "Basic6",
-    bestSubject: "Computing",
-    age: 13,
-    hobby: "Writing",
-  },
-  {
-    firstName: "Abukari",
-    lastName: "Zaharaw",
-    class: "Basic5",
-    bestSubject: "English",
-    age: 12,
-    hobby: "Drawing",
-  },
-  {
-    firstName: "A.Rahim",
-    lastName: "Humu",
-    class: "Basic5",
-    bestSubject: "RME",
-    age: 12,
-    hobby: "Eating",
-  },
-  {
-    firstName: "Adam",
-    lastName: "Kawsada",
-    class: "Basic4",
-    bestSubject: "Mathematics",
-    age: 10,
-    hobby: "Writing",
-  },
-  {
-    firstName: "Alhasssan",
-    lastName: "Saida",
-    class: "Basic6",
-    bestSubject: "English",
-    age: 13,
-    hobby: "cooking",
-  },
-  {
-    firstName: "Ibrahim",
-    lastName: "Fauzan",
-    class: "Basic3",
-    bestSubject: "English",
-    age: 9,
-    hobby: "Playing",
-  },
-  {
-    firstName: "Arafat",
-    lastName: "Abdul-Majeed",
-    class: "Basic6",
-    bestSubject: "English",
-    age: 12,
-    hobby: "Singing",
-  },
-  {
-    firstName: "Abukari",
-    lastName: "Akram",
-    class: "Basic4",
-    bestSubject: "Mathematics",
-    age: 10,
-    hobby: "cooking",
-  },
-  {
-    firstName: "Abdul-Aziz",
-    lastName: "Issahaku",
-    class: "Basic6",
-    bestSubject: "Computing",
-    age: 12,
-    hobby: "Writing",
-  },
-  {
-    firstName: "Abukari",
-    lastName: "Wakilu",
-    class: "Basic5",
-    bestSubject: "Science",
-    age: 11,
-    hobby: "Drawing",
-  },
-];
+// const students = [
+//   {
+//     firstName: "Adam ",
+//     lastName: "Maata",
+//     class: "Basic6",
+//     bestSubject: "Computing",
+//     age: 13,
+//     hobby: "Writing",
+//   },
+//   {
+//     firstName: "Abukari",
+//     lastName: "Zaharaw",
+//     class: "Basic5",
+//     bestSubject: "English",
+//     age: 12,
+//     hobby: "Drawing",
+//   },
+//   {
+//     firstName: "A.Rahim",
+//     lastName: "Humu",
+//     class: "Basic5",
+//     bestSubject: "RME",
+//     age: 12,
+//     hobby: "Eating",
+//   },
+//   {
+//     firstName: "Adam",
+//     lastName: "Kawsada",
+//     class: "Basic4",
+//     bestSubject: "Mathematics",
+//     age: 10,
+//     hobby: "Writing",
+//   },
+//   {
+//     firstName: "Alhasssan",
+//     lastName: "Saida",
+//     class: "Basic6",
+//     bestSubject: "English",
+//     age: 13,
+//     hobby: "cooking",
+//   },
+//   {
+//     firstName: "Ibrahim",
+//     lastName: "Fauzan",
+//     class: "Basic3",
+//     bestSubject: "English",
+//     age: 9,
+//     hobby: "Playing",
+//   },
+//   {
+//     firstName: "Arafat",
+//     lastName: "Abdul-Majeed",
+//     class: "Basic6",
+//     bestSubject: "English",
+//     age: 12,
+//     hobby: "Singing",
+//   },
+//   {
+//     firstName: "Abukari",
+//     lastName: "Akram",
+//     class: "Basic4",
+//     bestSubject: "Mathematics",
+//     age: 10,
+//     hobby: "cooking",
+//   },
+//   {
+//     firstName: "Abdul-Aziz",
+//     lastName: "Issahaku",
+//     class: "Basic6",
+//     bestSubject: "Computing",
+//     age: 12,
+//     hobby: "Writing",
+//   },
+//   {
+//     firstName: "Abukari",
+//     lastName: "Wakilu",
+//     class: "Basic5",
+//     bestSubject: "Science",
+//     age: 11,
+//     hobby: "Drawing",
+//   },
+// ];
 
 //root route
 app.get("/", (req, res) => {
@@ -115,18 +115,18 @@ app.post("/api/students", async (req, res) => {
 });
 
 //get all students
-app.get("/api/students", (req, res) => {
+app.get("/api/students", async (req, res) => {
+  const students = await studentsModel.find();
   if (!students) {
     res.status(404).json({
-      status: false,
-      message: "No student found here",
+      status: "Fail",
+      message: "Students no found",
       students: {},
     });
   }
-  res.status(200).json({
-    status: "success",
-    numOfStudents: students.length,
-    students: students,
+  res.status(201).json({
+    status: "Success",
+    studens: students,
   });
 });
 
