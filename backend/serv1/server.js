@@ -115,7 +115,7 @@ app.get("/api/pizzas", async (req, res) => {
 });
 
 //get pizza price less than $10
-app.get("/api/cheap", async (req, res) => {
+app.get("/api/pizza/cheap", async (req, res) => {
   try {
     const cheapPizza = await pizzaModel.find({ price: { $lte: 10 } });
     res.status(201).json({
@@ -138,6 +138,27 @@ app.get("/api/sort", async (req, res) => {
       status: "succes",
       pizza: sortPizza,
     });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+
+//update data
+app.patch("/api/pizza/:id", async (req, res) => {
+  try {
+    const pizza = await pizzaModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidator: true,
+    });
+    if (!pizza) {
+      return res
+        .status(404)
+        .json({ status: "fail", message: "Pizza not found" });
+    }
+    res.status(201).json({ status: "Success", pizza: pizza });
   } catch (err) {
     res.status(404).json({
       status: "fail",
