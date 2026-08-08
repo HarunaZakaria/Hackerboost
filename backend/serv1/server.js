@@ -87,11 +87,12 @@ app.post("/api/pizzas", async (req, res) => {
   }
 });
 
-//get a pizza by name
-app.get("/api/pizzas/:name", (req, res) => {
+//get a pizza by name from database
+app.get("/api/pizzas/:name", async (req, res) => {
   const pizzaName = req.params.name;
-  const pizza = pizzas.find((p) => p.name === pizzaName);
-
+  const pizza = await pizzaModel.findOne({
+    name: new RegExp(`^${pizzaName}$`, "i"),
+  });
   if (!pizza) {
     res.status(404).json({
       status: false,
@@ -112,6 +113,23 @@ app.get("/api/pizzas", async (req, res) => {
     status: "success",
     total: pizzas.length,
     pizzas: pizzas,
+  });
+});
+
+//get pizza by Id
+app.get("/api/pizzas/:id", async (req, res) => {
+  const pizzaId = req.params.id;
+  const pizza = await pizzaModel.findById(pizzaId);
+  if (!pizza) {
+    res.status(404).json({
+      status: "fail",
+      message: "wrong id",
+      pizza: {},
+    });
+  }
+  res.status(200).json({
+    status: "success",
+    pizza: pizza,
   });
 });
 
