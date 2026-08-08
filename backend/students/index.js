@@ -19,7 +19,7 @@ mongoose
 
 // const students = [
 //   {
-//     firstName: "Adam ",
+//     firstName: "adam ",
 //     lastName: "Maata",
 //     class: "Basic6",
 //     bestSubject: "Computing",
@@ -113,7 +113,39 @@ app.post("/api/students", async (req, res) => {
     student: newStudent,
   });
 });
-
+//get students by class
+app.get("/api/students/:name", async (req, res) => {
+  const studentClass = req.params.class;
+  const student = await studentsModel.findOne({
+    name: new RegExp(`^${studentClass}$`, "i"),
+  });
+  if (!student) {
+    return res.status(404).json({
+      status: "Fail",
+      message: "Student no found",
+      student: {},
+    });
+  }
+  res.status(200).json({
+    status: "Success",
+    student: student,
+  });
+});
+//get a student by id
+app.get("/api/students/:id", async (req, res) => {
+  const studentId = await req.params.id;
+  if (!studentId) {
+    res.status(404).json({
+      status: "fail",
+      message: "Wrong Id",
+      student: {},
+    });
+  }
+  res.status(200).json({
+    status: "success",
+    student: studentId,
+  });
+});
 //get all students
 app.get("/api/students", async (req, res) => {
   const students = await studentsModel.find();
@@ -132,5 +164,5 @@ app.get("/api/students", async (req, res) => {
 
 //listen on
 app.listen(port, () => {
-  console.log(`app running on port: ${port}`);
+  console.log(`app running on port:http://localhost:${port}`);
 });
