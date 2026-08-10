@@ -86,6 +86,22 @@ app.post("/api/pizzas", async (req, res) => {
     });
   }
 });
+//get pizza by Id
+app.get("/api/pizzas/:id", async (req, res) => {
+  const pizzaId = req.params.id;
+  const pizza = await pizzaModel.findById(pizzaId);
+  if (!pizza) {
+    res.status(404).json({
+      status: "fail",
+      message: "wrong id",
+      pizza: {},
+    });
+  }
+  res.status(200).json({
+    status: "success",
+    pizza: pizza,
+  });
+});
 
 //get a pizza by name from database
 app.get("/api/pizzas/:name", async (req, res) => {
@@ -113,23 +129,6 @@ app.get("/api/pizzas", async (req, res) => {
     status: "success",
     total: pizzas.length,
     pizzas: pizzas,
-  });
-});
-
-//get pizza by Id
-app.get("/api/pizzas/:id", async (req, res) => {
-  const pizzaId = req.params.id;
-  const pizza = await pizzaModel.findById(pizzaId);
-  if (!pizza) {
-    res.status(404).json({
-      status: "fail",
-      message: "wrong id",
-      pizza: {},
-    });
-  }
-  res.status(200).json({
-    status: "success",
-    pizza: pizza,
   });
 });
 
@@ -167,19 +166,19 @@ app.get("/api/sort", async (req, res) => {
 
 //update data
 app.patch("/api/pizza/:id", async (req, res) => {
+  const pizzaId = req.params.id
+    const updates = res.body
   try {
-    const pizza = await pizzaModel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidator: true,
-    });
-    if (!pizza) {
+    
+    const updatePizza = await pizzaModel.findByIdAndUpdate(pizzaId, {$set: updates}, {new: true});
+    if (!updatePizza) {
       return res
         .status(404)
         .json({ status: "fail", message: "Pizza not found" });
     }
-    res.status(201).json({ status: "Success", pizza: pizza });
+    res.status(201).json({ status: "Success", pizza: updatePizza });
   } catch (err) {
-    res.status(404).json({
+    res.status(5000).json({
       status: "fail",
       message: err.message,
     });
