@@ -113,28 +113,11 @@ app.post("/api/students", async (req, res) => {
     student: newStudent,
   });
 });
-//get students by class
-app.get("/api/students/:name", async (req, res) => {
-  const studentClass = req.params.class;
-  const student = await studentsModel.findOne({
-    name: new RegExp(`^${studentClass}$`, "i"),
-  });
-  if (!student) {
-    return res.status(404).json({
-      status: "Fail",
-      message: "Student no found",
-      student: {},
-    });
-  }
-  res.status(200).json({
-    status: "Success",
-    student: student,
-  });
-});
 //get a student by id
 app.get("/api/students/:id", async (req, res) => {
-  const studentId = await req.params.id;
-  if (!studentId) {
+  const studentId = req.params.id;
+  const student = await studentsModel.findById(studentId);
+  if (!student) {
     res.status(404).json({
       status: "fail",
       message: "Wrong Id",
@@ -143,25 +126,48 @@ app.get("/api/students/:id", async (req, res) => {
   }
   res.status(200).json({
     status: "success",
-    student: studentId,
-  });
-});
-//get all students
-app.get("/api/students", async (req, res) => {
-  const students = await studentsModel.find();
-  if (!students) {
-    res.status(404).json({
-      status: "Fail",
-      message: "Students no found",
-      students: {},
-    });
-  }
-  res.status(201).json({
-    status: "Success",
-    studens: students,
+    student: student,
   });
 });
 
+
+//get all students
+app.get("/api/students", async (req, res) => {
+  try {
+    const students = await studentsModel.find();
+    if (!students) {
+      res.status(404).json({
+        status: "Fail",
+        message: "Students no found",
+        students: {},
+      });
+    }
+    res.status(201).json({
+      status: "Success",
+      studens: students,
+    });
+  } catch (err) {
+    res.status(5000).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
+//get students by class not working for now
+// app.get("/api/students", async (req, res) => {
+//   const studentClass = req.params.class;
+//   if(!studentClass){
+//     return res.status(404).json({message:"Please provide a class"})
+//   }
+//   const students = await studentsModel.find({
+//     class: new RegExp(`^${studentClass}$`, "i"),
+//   });
+  
+//   res.status(200).json({
+//     status: "Success",
+//     student: students,
+//   });
+// });
 //listen on
 app.listen(port, () => {
   console.log(`app running on port:http://localhost:${port}`);
