@@ -73,6 +73,27 @@ app.patch("/api/items/:id", async (req, res) => {
   }
 });
 
+//find item and delete
+app.delete("/api/items/:id", async (req, res) => {
+  try {
+    const deleteItem = await itemModel.findByIdAndDelete(req.params.id);
+    if (!deleteItem) {
+      return res.status(404).json({
+        status: "Fail",
+        message: "Item not found",
+      });
+    }
+    res.status(204).json({
+      status: "Success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+});
 ///listen on port
 app.listen(port, () => {
   console.log(`App running on: http://localhost:${port}`);
