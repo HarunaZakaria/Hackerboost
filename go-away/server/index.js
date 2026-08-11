@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const item = require("./src/models/items");
 const itemModel = require("./src/models/items");
@@ -9,6 +10,10 @@ dotenv.config();
 const port = process.env.port || 5000;
 const app = express();
 //const port = 5000;
+
+//middlewares
+app.use(cors());
+app.use(express.json());
 
 //connect to mongoDB
 mongoose
@@ -42,6 +47,26 @@ app.post("/api/items", async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: "fail",
+      message: err.message,
+    });
+  }
+});
+app.get("/api/items", async (req, res) => {
+  try {
+    const items = await itemModel.find();
+    if (!items) {
+      return res.status(404).json({
+        status: "fail",
+        message: "No item found",
+      });
+    }
+    res.status(200).json({
+      status: "success",
+      data: items,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "Fail",
       message: err.message,
     });
   }
