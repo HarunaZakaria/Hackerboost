@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Logo from "./components/Logo";
 import PackingList from "./components/PackingList";
@@ -8,17 +8,73 @@ import Form from "./components/Form";
 function App() {
   //acreate items
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setErro] = useState(null);
+
+  //fetch items from api
+  useEffect(function () {
+    async function fetchItems() {
+      setIsLoading(true);
+      setErro(null);
+      try {
+        const response = await fetch("http://localhost:5000/api/items");
+        if (!response.ok) {
+          throw new Error("Something went wrong!");
+        }
+        const data = await response.json();
+        setItems(data.data);
+      } catch (error) {
+        setErro(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchItems();
+  }, []);
+
+  //handle add item
+  async function handleAddItem(newItem) {
+    const response = await fetch("http://localhost:5000/api/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Something went wrong!");
+    }
+    setItems((item) => [...items, data.data.item]);
+  }
 
   //handle delete
-  function deleteItem(id) {
+  async function deleteItem(id) {
+    const response = await fetch(`http://localhost:5000/api/items/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
     setItems((item) => items.filter((item) => item.id !== id));
   }
 
   //handle toggle items
-  function toggleItem(id) {
+  async function toggleItem(id) {
+    const response = await fetch(`http://localhost:5000/api/items/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Something went wrong!");
+    }
     setItems((item) =>
       items.map((item) =>
-        item.id === id ? { ...item, packed: !item.packed } : item,
+        item._id === id ? { ...item, packed: !item.packed } : item,
       ),
     );
   }
