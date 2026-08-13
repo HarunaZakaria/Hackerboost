@@ -15,7 +15,6 @@ function App() {
   useEffect(function () {
     async function fetchItems() {
       setIsLoading(true);
-      setErro(null);
       try {
         const response = await fetch("http://localhost:5000/api/items");
         if (!response.ok) {
@@ -46,7 +45,7 @@ function App() {
     if (!response.ok) {
       throw new Error(data.message || "Something went wrong!");
     }
-    setItems((item) => [...items, data.data.item]);
+    setItems((item) => [...items, data.data]);
   }
 
   //handle delete
@@ -57,12 +56,12 @@ function App() {
     if (!response.ok) {
       throw new Error("Something went wrong!");
     }
-    setItems((item) => items.filter((item) => item.id !== id));
+    setItems((item) => items.filter((item) => item._id !== id));
   }
 
   //handle toggle items
-  async function toggleItem(id) {
-    const response = await fetch(`http://localhost:5000/api/items/${id}`, {
+  async function toggleItem(_id) {
+    const response = await fetch(`http://localhost:5000/api/items/${_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -73,9 +72,7 @@ function App() {
       throw new Error(data.message || "Something went wrong!");
     }
     setItems((item) =>
-      items.map((item) =>
-        item._id === id ? { ...item, packed: !item.packed } : item,
-      ),
+      items.map((item) => (item._id === _id ? data.data : item)),
     );
   }
 
