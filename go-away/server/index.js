@@ -42,7 +42,7 @@ app.post("/api/items", async (req, res) => {
     }
     res.status(201).json({
       status: "success",
-      item: item,
+      item: {item},
     });
   } catch (err) {
     res.status(404).json({
@@ -88,7 +88,7 @@ app.patch("/api/items/:id", async (req, res) => {
     );
     res.status(201).json({
       status: "Success",
-      data: item,
+      data: {item},
     });
   } catch (err) {
     res.status(404).json({
