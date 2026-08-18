@@ -5,7 +5,7 @@ import friendsModel from "./src/models/friends.js";
 
 dotenv.config();
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //middlewares
 app.use(express.json());
