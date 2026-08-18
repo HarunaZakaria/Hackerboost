@@ -21,4 +21,4 @@ const friendSchema = new mongoose.Schema({
 // model
 const friendModel = mongoose.model("Friend", friendSchema);
 
-module.exports = friendModel;
+export default friendModel;
