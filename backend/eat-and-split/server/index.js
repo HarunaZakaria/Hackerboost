@@ -1,11 +1,14 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import friendsModel from "./src/models/friends";
+import friendsModel from "./src/models/friends.js";
 
 dotenv.config();
 const app = express();
 const port = 5000;
+
+//middlewares
+app.use(express.json());
 
 //connect to mongoDB
 mongoose
