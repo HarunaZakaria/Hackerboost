@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const itemModel = require("./src/models/items");
 const catchAsync = require("./src/utils/catchAsync");
+const { body, validationReslts } = require("express-validator");
 
 dotenv.config();
 
@@ -43,7 +44,7 @@ app.post(
     }
     res.status(201).json({
       status: "success",
-      item: { item },
+      item: item,
     });
   }),
 );
@@ -59,7 +60,7 @@ app.get(
     }
     res.status(200).json({
       status: "success",
-      data: { items },
+      data: items,
     });
   }),
 );
@@ -81,14 +82,15 @@ app.patch(
     );
     res.status(201).json({
       status: "Success",
-      data: { item },
+      data: item,
     });
   }),
 );
 
 //find item and delete
-app.delete("/api/items/:id", async (req, res) => {
-  try {
+app.delete(
+  "/api/items/:id",
+  catchAsync(async (req, res) => {
     const deleteItem = await itemModel.findByIdAndDelete(req.params.id);
     if (!deleteItem) {
       return res.status(404).json({
@@ -100,13 +102,8 @@ app.delete("/api/items/:id", async (req, res) => {
       status: "Success",
       data: null,
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+  }),
+);
 app.use((err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
