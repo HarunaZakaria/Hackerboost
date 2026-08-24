@@ -2,8 +2,8 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const item = require("./src/models/items");
 const itemModel = require("./src/models/items");
+const catchAsync = require("./src/utils/catchAsync");
 
 dotenv.config();
 
@@ -27,8 +27,9 @@ app.get("/", (req, res) => {
 });
 
 //create an Item
-app.post("/api/items", async (req, res) => {
-  try {
+app.post(
+  "/api/items",
+  catchAsync(async (req, res) => {
     const item = await itemModel.create({
       description: req.body.description,
       quantity: req.body.quantity,
@@ -42,17 +43,13 @@ app.post("/api/items", async (req, res) => {
     }
     res.status(201).json({
       status: "success",
-      item: {item},
+      item: { item },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
-app.get("/api/items", async (req, res) => {
-  try {
+  }),
+);
+app.get(
+  "/api/items",
+  catchAsync(async (req, res) => {
     const items = await itemModel.find();
     if (!items) {
       return res.status(404).json({
@@ -62,18 +59,14 @@ app.get("/api/items", async (req, res) => {
     }
     res.status(200).json({
       status: "success",
-      data: items,
+      data: { items },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "Fail",
-      message: err.message,
-    });
-  }
-});
+  }),
+);
 //toogle packed items
-app.patch("/api/items/:id", async (req, res) => {
-  try {
+app.patch(
+  "/api/items/:id",
+  catchAsync(async (req, res) => {
     const currentItem = await itemModel.findById(req.params.id);
     if (!currentItem) {
       res.status(404).json({
@@ -88,15 +81,10 @@ app.patch("/api/items/:id", async (req, res) => {
     );
     res.status(201).json({
       status: "Success",
-      data: {item},
+      data: { item },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+  }),
+);
 
 //find item and delete
 app.delete("/api/items/:id", async (req, res) => {
@@ -118,6 +106,15 @@ app.delete("/api/items/:id", async (req, res) => {
       message: err.message,
     });
   }
+});
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || "error";
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
+  });
 });
 ///listen on port
 app.listen(port, () => {
