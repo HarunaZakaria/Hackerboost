@@ -6,14 +6,13 @@ export default function PackingList({
   onToggle,
   onClearList,
 }) {
-  //console.log("This is from Packing list" + newItem);
   return (
     <div className="list">
       <ul>
-        {items.map((item, index) => (
+        {items.map((item) => (
           <Item
             item={item}
-            key={index}
+            key={item._id}
             deleteItem={deleteItem}
             onToggle={onToggle}
           />
