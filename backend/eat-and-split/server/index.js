@@ -1,13 +1,16 @@
 import dotenv from "dotenv";
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import friendsModel from "./src/models/friends.js";
+import catchAsync from "./src/utils/catchAsync.js";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
 //middlewares
+app.use(cors());
 app.use(express.json());
 
 //connect to mongoDB
@@ -21,8 +24,9 @@ app.get("/", (req, res) => {
 });
 
 //get all friends api
-app.get("/api/friends", async (req, res) => {
-  try {
+app.get(
+  "/api/friends",
+  catchAsync(async (req, res) => {
     const friends = await friendsModel.find();
     if (!friends) {
       res.status(404).json({
@@ -34,17 +38,13 @@ app.get("/api/friends", async (req, res) => {
       status: "success",
       data: { friends },
     });
-  } catch (err) {
-    res.status(500).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-});
+  }),
+);
 
 // add new friend
-app.post("/api/friends", async (req, res) => {
-  try {
+app.post(
+  "/api/friends",
+  catchAsync(async (req, res) => {
     const friend = await friendsModel.create({
       name: req.body.name,
       image: `https://i.pravatar.cc/100?u=${Date.now()}`, // Unique avatar URL
@@ -53,17 +53,13 @@ app.post("/api/friends", async (req, res) => {
       status: "Success",
       data: { friend },
     });
-  } catch (err) {
-    res.status(400).json({
-      status: "Error",
-      message: err.message,
-    });
-  }
-});
+  }),
+);
 
 //update balance
-app.patch("/api/friends/:id/balace", async (req, res) => {
-  try {
+app.patch(
+  "/api/friends/:id/balace",
+  catchAsync(async (req, res) => {
     const friend = await friendsModel.findByIdAndUpdate(
       req.params.id,
       { $inc: { balace: req.body.amount } },
@@ -79,13 +75,8 @@ app.patch("/api/friends/:id/balace", async (req, res) => {
       status: "success",
       data: { friend },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-});
+  }),
+);
 app.listen(port, () => {
   console.log(`app running on port: ${port}`);
 });
