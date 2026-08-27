@@ -8,9 +8,9 @@ export default function Friend({ friend, selectedFriend, onSelection }) {
       <li className={isSelected ? "selected" : ""}>
         <img src={image} alt={name} className="image" />
         <h3>{name}</h3>
-        <p>{balance}</p>
+        <p>Your balance: {balance}</p>
         <Button onHandleClick={() => onSelection(friend)}>
-          {isSelected ? "Close" : "Select"}
+          {isSelected ? "Select" : "Close"}
         </Button>
       </li>
     </>
