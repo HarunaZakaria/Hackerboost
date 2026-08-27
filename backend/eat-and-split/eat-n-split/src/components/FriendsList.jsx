@@ -3,11 +3,11 @@ import Friend from "./Friend";
 export default function FriendsList({ selectedFriend, onSelection, friends }) {
   return (
     <>
-      <ul>
-        {friends.map((friend, index) => (
+      <ul className="list">
+        {friends.map((friend) => (
           <Friend
             friend={friend}
-            key={index}
+            key={friend._id}
             selectedFriend={selectedFriend}
             onSelection={onSelection}
           />
