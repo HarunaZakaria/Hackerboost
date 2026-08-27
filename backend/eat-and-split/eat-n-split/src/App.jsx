@@ -21,7 +21,6 @@ function App() {
         }
         const data = await response.json();
         setFriends(data.data);
-        console.log(data.data);
       } catch (error) {
         setErro(error.message);
       }
@@ -33,7 +32,7 @@ function App() {
   //handle add friends click
   function handleAddFriend(friend) {
     setFriends((friends) => [...friends, friend]);
-    setShowAddFriend((showAddFriend) => !showAddFriend);
+    setShowAddFriend((show) => !show);
   }
 
   //handle selected friend
