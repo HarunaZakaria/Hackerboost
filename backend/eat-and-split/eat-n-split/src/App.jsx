@@ -37,7 +37,7 @@ function App() {
 
   //handle selected friend
   function handleSelectedFriend(friend) {
-    setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
+    setSelectedFriend((cur) => (cur?._id === friend._id ? null : friend));
     setShowAddFriend(false);
   }
 
