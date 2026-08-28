@@ -1,6 +1,6 @@
 import Friend from "./Friend";
 
-export default function FriendsList({ selectedFriend, onSelection, friends }) {
+export default function FriendsList({ selectedFriend,  onSelection, friends }) {
   return (
     <>
       <ul className="list">
@@ -9,7 +9,7 @@ export default function FriendsList({ selectedFriend, onSelection, friends }) {
             friend={friend}
             key={friend._id}
             selectedFriend={selectedFriend}
-            onSelection={onSelection}
+             onSelection={ onSelection}
           />
         ))}
       </ul>
