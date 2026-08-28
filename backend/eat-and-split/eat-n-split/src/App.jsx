@@ -45,7 +45,7 @@ function App() {
   function handleSplitBill(value) {
     setFriends((friends) =>
       friends.map((friend) =>
-        friend.id == selectedFriend.id
+        friend._id == selectedFriend._id
           ? { ...friend, balace: friend.balance + value }
           : friend,
       ),
