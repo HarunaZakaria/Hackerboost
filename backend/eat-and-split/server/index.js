@@ -36,7 +36,7 @@ app.get(
     }
     res.status(200).json({
       status: "success",
-      data: { friends },
+      data: friends,
     });
   }),
 );
@@ -77,6 +77,17 @@ app.patch(
     });
   }),
 );
+//error handling
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || "error";
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
+  });
+});
+//listening port
 app.listen(port, () => {
   console.log(`app running on port: ${port}`);
 });
