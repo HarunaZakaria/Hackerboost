@@ -3,7 +3,7 @@ import Button from "./components/Button";
 import FormAddFriend from "./components/FormAddFriend";
 import FormSplitBill from "./components/FormSplitBill";
 import FriendsList from "./components/FriendsList";
-import initialFriends from "./data";
+//import initialFriends from "./data";
 import Header from "./components/Header";
 
 function App() {
@@ -42,12 +42,27 @@ function App() {
   }
 
   //handle split bill
-  function handleSplitBill(value) {
+  async function handleSplitBill(value) {
+    const response = await fetch(
+      `http://localhost:5000/api/friends/${selectedFriend._id}/balance`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: Number(value),
+        }),
+      },
+    );
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
+    const data = await response.json();
+
     setFriends((friends) =>
       friends.map((friend) =>
-        friend._id == selectedFriend._id
-          ? { ...friend, balace: friend.balance + value }
-          : friend,
+        friend._id == selectedFriend._id ? data.data[0] : friend,
       ),
     );
     setSelectedFriend(null);
