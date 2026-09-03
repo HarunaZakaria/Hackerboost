@@ -61,10 +61,10 @@ app.patch(
   "/api/friends/:id/balance",
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const { balance } = req.body;
+    const { amount } = req.body;
     const friend = await friendsModel.findByIdAndUpdate(
       id,
-      { balance },
+      { $inc: { balance: Number(amount) } },
       { returnDocument: "after", runValidators: true },
       // { $inc: { balace: req.body.balace } },
       // { new: true, runValidators: true },
@@ -77,7 +77,7 @@ app.patch(
     }
     res.status(200).json({
       status: "success",
-      data: [friend],
+      data: friend,
     });
   }),
 );
